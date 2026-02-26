@@ -23,11 +23,10 @@
 ## ⚙️ كيفية التشغيل (How to Run)
 لضمان عمل المشروع لديك بشكل صحيح، يرجى اتباع الخطوات التالية:
 
-1. **المتطلبات (Prerequisites):**
+ * **المتطلبات (Prerequisites):**
    * يجب أن يكون لديك [**`Visual Studio 2022`**](https://visualstudio.microsoft.com/) أو إصدار أحدث مثبت على جهازك.
    * تأكد من تثبيت حزمة **.NET Desktop Development** داخل Visual Studio.
-
-2. **الخطوات (Steps):**
+ * **الخطوات (Steps):**
    * قم بتحميل المشروع (Download ZIP) أو عمل `Clone` للمستودع.
    * افتح الملف الذي ينتهي بلاحقة `.sln` (ملف الـ Solution).
    * انتظر حتى ينتهي Visual Studio من تحميل الملفات (Indexing).
