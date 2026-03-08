@@ -15,10 +15,19 @@
 * **نظام التنبيهات الذكي:** أشعار فوري عند الوصول او تخطي الوقت المتوقع.
 * **ملخص التفاصيل:** عرض شامل لبيانات المشروع والمهمة المختارة في واجهة واحدة.
 
+## 🚀 المميزات الحالية (v2.0)
+* **حذف المشاريع:** تم اضافة ال Delete بامكان المستخدم حذف المشروع باستخدام ال ID.
+* **تعديل المشاريع:** اصبح بامكان المستخدم تعديل وصف و الوقت الخاص ب المشروع المحدد.
+
+
 ## 🛠 التقنيات (Tech Stack)
 * **اللغة:** C#
 * **البيئة:** .NET Framework / Windows Forms
-* **إدارة البيانات:** يعتمد الإصدار الحالي على الـ RAM (In-memory storage).
+* **إدارة البيانات:** File System.
+
+## المميزات في النسخ
+* **V2** : تم اعادة هيكلة المشروع ليتوافق مع مبدأ الطبقات الثلاثة (Three Layer Architecture)
+
 
 ## ⚙️ كيفية التشغيل (How to Run)
 لضمان عمل المشروع لديك بشكل صحيح، يرجى اتباع الخطوات التالية:
@@ -35,8 +44,9 @@
 ## 📺 شاهد فيديو يوضح المشروع
 قمت بنشر فيديو لتجربة المشروع و اظهار الخطوات القادمة:
 [اضغط هنا لمشاهدة الفيديو على يوتيوب](https://youtube.com/@build-with-ibr?si=vJoIhVc9PzCLKBfZ)
+[فيديو النسخه الثانية على يوتيوب](https://youtu.be/PIref_SjI2c)
 
 ## 🔗 الروابط
-* **YouTube:** [Build With Ibrahim](https://youtube.com/@build-with-ibr?si=vJoIhVc9PzCLKBfZ)
+* **YouTube:** [Build With Ibrahim](https://youtu.be/PIref_SjI2c)
 * **GitHub:** [رابط_المستودع](https://github.com/Ibrahi44m44/Personal-Project-Time-Tracker.git)
 * **LinkedIn:** [Ibrahim-Aljamel](https://www.linkedin.com/in/ibrahim-aljamel-ba65b4380)
