@@ -1,0 +1,587 @@
+Form 1 : 
+using Personal_Project_Time_Tracker.DAL;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+
+namespace Personal_Project_Time_Tracker
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+
+        List<clsProject> ProjectsList = new List<clsProject>();
+        bool isRefreshing = false;
+        DateTime StartTime;
+        DateTime EndTime;
+
+        clsProject GetSelectedProject()
+        {
+            clsProject selected = cbProjects.SelectedItem as clsProject;
+            return selected;
+        }
+        clsTask GetSelectedTask()
+        {
+            clsTask selected = cbTask.SelectedItem as clsTask;
+            return selected;
+        }
+
+
+        void StartNotifications()
+        {
+            notifyIcon1.Icon = SystemIcons.Application;
+            notifyIcon1.BalloonTipIcon = ToolTipIcon.Info;
+            notifyIcon1.BalloonTipTitle = "OverDue";
+            notifyIcon1.BalloonTipText = "The Time For Project : " + GetSelectedProject().ToString() + " IS Over";
+            notifyIcon1.ShowBalloonTip(1000);
+        }
+
+
+        void FillProjectsComboBox()
+        {
+            cbProjects.DataSource = null;
+            cbProjects.DataSource = AppData.ProjectsList;
+            cbProjects.DisplayMember = "Name";
+        }
+        void FillTasksComboBox()
+        {
+            cbTask.DataSource = null;
+            cbTask.DataSource = GetSelectedProject().TasksList;
+            cbTask.DisplayMember = "Name";
+        }
+        void RefreshTask()
+        {
+            if (cbProjects.SelectedIndex == -1) return;
+
+            isRefreshing = true;
+
+            FillTasksComboBox();
+
+            isRefreshing = false;
+        }
+        void RefreshTaskDetials()
+        {
+            clsTask SelectedTask = GetSelectedTask();
+            if (SelectedTask == null) return;
+            string timeTemplate = "00:00:00";
+
+            if (SelectedTask != null)
+            {
+                TimeSpan t = TimeSpan.FromSeconds(SelectedTask.TotalTime);
+                timeTemplate = string.Format("{0:D2}:{1:D2}:{2:D2}", (int)t.TotalHours, t.Minutes, t.Seconds);
+            }
+            txtDetials.AppendText(Environment.NewLine + "Task Name : " + SelectedTask.Name);
+            txtDetials.AppendText(Environment.NewLine + "Task Description : " + SelectedTask.Description);
+            txtDetials.AppendText(Environment.NewLine + "Task Time : " + timeTemplate);
+        }
+        void RefreshProjectDetils()
+        {
+            clsProject SelectedProject = GetSelectedProject();
+
+            txtDetials.Text = "Project Name : " + SelectedProject.Name;
+            txtDetials.AppendText(Environment.NewLine + "Project Description : " + SelectedProject.Description);
+            txtDetials.AppendText(Environment.NewLine + "Project Expected Time : " + SelectedProject.ExpectedTime + " H ");
+
+        }
+        void UpdateRemainingTime(clsProject SelectedProject)
+        {
+
+            int totalTasksSeconds = 0;
+
+            foreach (clsTask task in SelectedProject.TasksList)
+            {
+                totalTasksSeconds += task.TotalTime;
+            }
+
+            int remainingSeconds = ProjectManager.GetProjectRemainingTime(SelectedProject);
+            TimeSpan t = TimeSpan.FromSeconds(Math.Max(remainingSeconds, 0));
+
+            if (remainingSeconds > 0)
+                txtTotalProjectTime.Text = $"{(int)t.TotalHours}h {t.Minutes}m remaining";
+            else
+                txtTotalProjectTime.Text = "Overdue!";
+            btnStart.Enabled = remainingSeconds > 0;
+
+            txtTotalProjectTime.ForeColor = remainingSeconds >= 0 ? Color.Black : Color.Red;
+
+            if (remainingSeconds <= 0)
+                StartNotifications();
+        }
+        void RefreshDetials()
+        {
+            if (cbProjects.SelectedIndex == -1) return;
+
+            clsProject SelectedProject = GetSelectedProject();
+            if (SelectedProject != null)
+            {
+                RefreshProjectDetils();
+                if (SelectedProject.TasksList != null && SelectedProject.TasksList.Count > 0)
+                    RefreshTaskDetials();
+
+                UpdateRemainingTime(SelectedProject);
+            }
+
+        }
+
+        private void btnAddProject_Click(object sender, EventArgs e)
+        {
+            frmProjectAdd frm = new frmProjectAdd();
+            frm.ShowDialog();
+            FillProjectsComboBox();
+        }
+        private void btnAddTask_Click(object sender, EventArgs e)
+        {
+            if (cbProjects.SelectedIndex != -1)
+            {
+                frmAddTask frm = new frmAddTask(cbProjects.SelectedIndex);
+                frm.ShowDialog();
+
+                RefreshTask();
+
+                if (cbTask.Items.Count > 0)
+                {
+                    cbTask.SelectedIndex = cbTask.Items.Count - 1;
+                }
+
+                RefreshDetials();
+            }
+        }
+
+
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (cbTask.SelectedIndex == -1)
+            {
+                MessageBox.Show("Please select a task first.");
+                return;
+            }
+            StartTime = DateTime.Now;
+            lblTimer.Text = "00:00:00";
+            btnStop.Enabled = true;
+            btnStart.Enabled = false;
+            timer1.Start();
+
+        }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
+
+            TimeSpan duration = DateTime.Now - StartTime;
+            lblTimer.Text = duration.ToString(@"hh\:mm\:ss");
+
+        }
+        private void btnStope_Click(object sender, EventArgs e)
+        {
+
+            timer1.Stop();
+
+            if (cbTask.SelectedIndex == -1)
+                return;
+
+            clsTask selectedTask = GetSelectedTask();
+
+            EndTime = DateTime.Now;
+            TimeSpan duration = EndTime - StartTime;
+
+            selectedTask.TotalTime += (int)duration.TotalSeconds;
+
+            ProjectData.SaveDataToFile(AppData.ProjectsList);
+
+            lblTimer.Text = "00:00:00";
+
+            btnStop.Enabled = false;
+            btnStart.Enabled = true;
+
+            RefreshDetials();
+
+        }
+
+
+        private void cbProjects_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isRefreshing) return;
+
+            RefreshTask();
+            RefreshDetials();
+        }
+        private void cbTask_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isRefreshing) return;
+
+            RefreshDetials();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ProjectsList = ProjectData.LoadProjects();
+            cbProjects.DataSource = ProjectsList;
+            cbProjects.DisplayMember = "Name";
+            btnStop.Enabled = false;
+        }
+    }
+}
+
+
+frm Add Task :
+using Personal_Project_Time_Tracker.DAL;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Personal_Project_Time_Tracker
+{
+    public partial class frmAddTask : Form
+    {
+        private int ProjectIndex;
+        public frmAddTask(int ProjectIndex)
+        {
+            InitializeComponent();
+            this.ProjectIndex = ProjectIndex;
+        }
+
+
+        private void btnSaveTask_Click(object sender, EventArgs e)
+        {
+            if (!AppData.Validation(errorProvider1, txtTaskName, txtTaskDescription))
+                return;
+
+            clsProject SelectedProject = AppData.ProjectsList[ProjectIndex];
+            clsTask NewTask = new clsTask(txtTaskName.Text, txtTaskDescription.Text);
+            ProjectManager.AddTask(SelectedProject, NewTask);
+            ProjectData.SaveDataToFile(AppData.ProjectsList);
+
+            this.Close();
+        }
+    }
+}
+
+
+frm Add Project :
+using Personal_Project_Time_Tracker.DAL;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Personal_Project_Time_Tracker
+{
+    public partial class frmProjectAdd : Form
+    {
+        public frmProjectAdd()
+        {
+            InitializeComponent();
+        }
+
+
+
+
+        private void btnSaveProject_Click(object sender, EventArgs e)
+        {
+            if (!AppData.Validation(errorProvider1, txtProjectName, txtProjectDescription, nudExpectedHours, nudExpectedMinutes))
+                return;
+
+            int ExpTime = (int)(nudExpectedHours.Value * 3600 + nudExpectedMinutes.Value * 60);
+            int NewId = ProjectData.GetNextProjectID(AppData.ProjectsList);
+            clsProject NewProject = new clsProject(NewId, txtProjectName.Text, txtProjectDescription.Text, ExpTime);
+
+            ProjectManager.AddProject(AppData.ProjectsList, NewProject);
+            ProjectData.SaveDataToFile(AppData.ProjectsList);
+            this.Close();
+        }
+    }
+}
+
+
+Project Data :
+using System;
+using System.Collections.Generic;
+using System.IO;
+
+namespace Personal_Project_Time_Tracker.DAL
+{
+    public static class ProjectData
+    {
+        private const string FilePath = "Projects.txt";
+
+        public static void SaveDataToFile(List<clsProject> projects)
+        {
+            using (StreamWriter writer = new StreamWriter(FilePath, false))
+            {
+                foreach (var project in projects)
+                {
+                    writer.WriteLine($"P#:#{project.ID}#:#{project.Name}#:#{project.Description}#:#{project.ExpectedTime}");
+
+                    foreach (var task in project.TasksList)
+                    {
+                        writer.WriteLine($"T#:#{task.Name}#:#{task.Description}#:#{task.TotalTime}");
+                    }
+                }
+            }
+        }
+        public static int GetNextProjectID(List<clsProject> ProjectsList)
+        {
+            int maxID = 0;
+
+            foreach (clsProject project in ProjectsList)
+            {
+                if (project.ID > maxID)
+                {
+                    maxID = project.ID;
+                }
+            }
+
+            return maxID + 1;
+        }
+        public static List<clsProject> LoadProjects()
+        {
+            List<clsProject> projects = new List<clsProject>();
+
+            if (!File.Exists(FilePath))
+                return projects;
+
+            clsProject currentProject = null;
+
+            foreach (var line in File.ReadAllLines(FilePath))
+            {
+                if (string.IsNullOrWhiteSpace(line)) continue;
+
+                var parts = line.Split(new[] { "#:#" }, StringSplitOptions.None);
+
+                if (parts[0] == "P")
+                {
+                    currentProject = new clsProject(int.Parse(parts[1]), parts[2], parts[3], int.Parse(parts[4]));
+
+                    projects.Add(currentProject);
+                }
+                else if (parts[0] == "T" && currentProject != null)
+                {
+                    currentProject.TasksList.Add(new clsTask(parts[1], parts[2], int.Parse(parts[3])));
+                }
+            }
+
+            return projects;
+        }
+    }
+}
+
+
+project Manager : 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Personal_Project_Time_Tracker
+{
+    public static class ProjectManager
+    { // THIS FILE IS BLL (BUSINESS LOGIC LAYER )
+        // في هاد الملف لح يكون كل لوجيك كل حساب 
+        /*
+            1-2_ حساب الوقت المتبقي للمشورع و التحقق من اذا خلص وقتو
+            3-4_ اضافة مشروع و مهمه للمشروع 
+            5_ اضافة الوقت للمهمة
+        */
+        public static int GetProjectRemainingTime(clsProject project)
+        {
+            int totalTaskTime = 0;
+            foreach (var t in project.TasksList)
+                totalTaskTime += t.TotalTime;
+
+            return project.ExpectedTime - totalTaskTime;
+        }
+
+        public static bool IsProjectOverdue(clsProject project)
+        {
+            return GetProjectRemainingTime(project) <= 0;
+        }
+
+        public static void AddTask(clsProject project, clsTask task)
+        {
+            project.TasksList.Add(task);
+        }
+
+        public static void AddProject(List<clsProject> projects, clsProject project)
+        {
+            projects.Add(project);
+        }
+        public static void AddWorkTime(clsTask Task, DateTime EndTime, DateTime StartTime)
+        {
+            if (Task == null) return;
+            TimeSpan duration = EndTime - StartTime;
+            if (duration.TotalSeconds > 0)
+                Task.TotalTime += (int)duration.TotalSeconds;
+        }
+
+    }
+}
+
+
+AppData : 
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Personal_Project_Time_Tracker
+{
+    public static class AppData
+    {
+
+        private static bool IsInValidCharector(TextBox t)
+        {
+
+            return t.Text.Contains("#") || t.Text.Contains(":");
+        }
+
+        public static bool Validation(ErrorProvider ep, TextBox tName, TextBox tDescription, NumericUpDown nud = null, NumericUpDown nud2 = null)
+        {
+            // Clear Error Provider For Last Errors
+            ep.Clear();
+
+            // Validation  For Froject Name
+            if (string.IsNullOrWhiteSpace(tName.Text))
+            {
+                ep.SetError(tName, "Required");
+                return false;
+            }
+            if (IsInValidCharector(tName))
+            {
+                ep.SetError(tName, "The Fiad Name Cannon Contains : OR #");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(tDescription.Text))
+            {
+                ep.SetError(tDescription, "Required");
+                return false;
+            }
+            if (IsInValidCharector(tDescription))
+            {
+                ep.SetError(tDescription, "The Faild Description Cannon Contains : OR #");
+                return false;
+            }
+
+            if (nud != null)
+                if (nud.Value < 0 & nud2.Value == 0)
+                {
+                    ep.SetError(nud, "The Zero Hours IS Invalid So We Change 0 to 1");
+                    ep.Icon = SystemIcons.Warning;
+                    nud.Value = 1;
+                }
+            if (nud2 != null && nud.Value == 0)
+                if (nud2.Value < 0)
+                {
+                    ep.SetError(nud2, "The Zero Minutes IS Invalid So We Change 0 to 1");
+                    ep.Icon = SystemIcons.Warning;
+                    nud2.Value = 1;
+                }
+            return true;
+        }
+
+
+        public static List<clsProject> ProjectsList { get; set; } = new List<clsProject>();
+
+
+    }
+}
+
+
+clsProject : 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Personal_Project_Time_Tracker
+{
+    public class clsProject
+    {
+        public int ID { get; private set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int ExpectedTime { get; set; }
+        public List<clsTask> TasksList { get; set; } = new List<clsTask>();
+
+
+        public clsProject(int ID, string Name, string Description, int ExpectedTime)
+        {
+            this.ID = ID;
+            this.Name = Name;
+            this.Description = Description;
+            this.ExpectedTime = ExpectedTime;
+        }
+
+
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}
+
+clsTask : 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Personal_Project_Time_Tracker
+{
+    public class clsTask
+    {
+
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public int TotalTime { get; set; } = 0;
+
+        public clsTask(string Name, string Description)
+        {
+            this.Name = Name;
+            this.Description = Description;
+        }
+        public clsTask(string Name, string Description, int TotalTime)
+        {
+            this.Name = Name;
+            this.Description = Description;
+            this.TotalTime = TotalTime;
+        }
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}
+

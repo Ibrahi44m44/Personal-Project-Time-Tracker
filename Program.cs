@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Personal_Project_Time_Tracker
+namespace Personal_Project_Time_Tracker.Forms
 {
     internal static class Program
     {

@@ -28,15 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtProjectName = new System.Windows.Forms.TextBox();
             this.txtProjectDescription = new System.Windows.Forms.TextBox();
-            this.nudExpectedTime = new System.Windows.Forms.NumericUpDown();
+            this.nudExpectedHours = new System.Windows.Forms.NumericUpDown();
             this.lblProjectName = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblExpectedTime = new System.Windows.Forms.Label();
-            this.btnAddProject = new System.Windows.Forms.Button();
+            this.btnSaveProject = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedTime)).BeginInit();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.nudExpectedMinutes = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedHours)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedMinutes)).BeginInit();
             this.SuspendLayout();
             // 
             // txtProjectName
@@ -54,12 +60,12 @@
             this.txtProjectDescription.Size = new System.Drawing.Size(397, 121);
             this.txtProjectDescription.TabIndex = 1;
             // 
-            // nudExpectedTime
+            // nudExpectedHours
             // 
-            this.nudExpectedTime.Location = new System.Drawing.Point(185, 354);
-            this.nudExpectedTime.Name = "nudExpectedTime";
-            this.nudExpectedTime.Size = new System.Drawing.Size(120, 24);
-            this.nudExpectedTime.TabIndex = 2;
+            this.nudExpectedHours.Location = new System.Drawing.Point(212, 354);
+            this.nudExpectedHours.Name = "nudExpectedHours";
+            this.nudExpectedHours.Size = new System.Drawing.Size(120, 24);
+            this.nudExpectedHours.TabIndex = 2;
             // 
             // lblProjectName
             // 
@@ -84,19 +90,19 @@
             this.lblExpectedTime.AutoSize = true;
             this.lblExpectedTime.Location = new System.Drawing.Point(72, 354);
             this.lblExpectedTime.Name = "lblExpectedTime";
-            this.lblExpectedTime.Size = new System.Drawing.Size(96, 17);
+            this.lblExpectedTime.Size = new System.Drawing.Size(119, 17);
             this.lblExpectedTime.TabIndex = 5;
-            this.lblExpectedTime.Text = "Expected time";
+            this.lblExpectedTime.Text = "Expected time (H)";
             // 
-            // btnAddProject
+            // btnSaveProject
             // 
-            this.btnAddProject.Location = new System.Drawing.Point(366, 339);
-            this.btnAddProject.Name = "btnAddProject";
-            this.btnAddProject.Size = new System.Drawing.Size(200, 39);
-            this.btnAddProject.TabIndex = 6;
-            this.btnAddProject.Text = "Add Project";
-            this.btnAddProject.UseVisualStyleBackColor = true;
-            this.btnAddProject.Click += new System.EventHandler(this.btnAddProject_Click);
+            this.btnSaveProject.Location = new System.Drawing.Point(365, 371);
+            this.btnSaveProject.Name = "btnSaveProject";
+            this.btnSaveProject.Size = new System.Drawing.Size(200, 39);
+            this.btnSaveProject.TabIndex = 4;
+            this.btnSaveProject.Text = "Add Project";
+            this.btnSaveProject.UseVisualStyleBackColor = true;
+            this.btnSaveProject.Click += new System.EventHandler(this.btnSaveProject_Click);
             // 
             // label1
             // 
@@ -108,22 +114,46 @@
             this.label1.TabIndex = 7;
             this.label1.Text = "Add New Project";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // nudExpectedMinutes
+            // 
+            this.nudExpectedMinutes.Location = new System.Drawing.Point(212, 402);
+            this.nudExpectedMinutes.Name = "nudExpectedMinutes";
+            this.nudExpectedMinutes.Size = new System.Drawing.Size(120, 24);
+            this.nudExpectedMinutes.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(71, 402);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(120, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Expected time (M)";
+            // 
             // frmProjectAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 438);
+            this.ClientSize = new System.Drawing.Size(652, 465);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.nudExpectedMinutes);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAddProject);
+            this.Controls.Add(this.btnSaveProject);
             this.Controls.Add(this.lblExpectedTime);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblProjectName);
-            this.Controls.Add(this.nudExpectedTime);
+            this.Controls.Add(this.nudExpectedHours);
             this.Controls.Add(this.txtProjectDescription);
             this.Controls.Add(this.txtProjectName);
             this.Name = "frmProjectAdd";
             this.Text = "frmProjectAdd";
-            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedHours)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudExpectedMinutes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -133,11 +163,14 @@
 
         private System.Windows.Forms.TextBox txtProjectName;
         private System.Windows.Forms.TextBox txtProjectDescription;
-        private System.Windows.Forms.NumericUpDown nudExpectedTime;
+        private System.Windows.Forms.NumericUpDown nudExpectedHours;
         private System.Windows.Forms.Label lblProjectName;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblExpectedTime;
-        private System.Windows.Forms.Button btnAddProject;
+        private System.Windows.Forms.Button btnSaveProject;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.NumericUpDown nudExpectedMinutes;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -117,4 +117,77 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="cbProjects.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="label1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnStart.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnStop.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="notifyIcon1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <metadata name="txtTotalProjectTime.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="lblTotalTimeForProject.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnAddProject.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnAddTask.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="timer1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>151, 17</value>
+  </metadata>
+  <metadata name="cbTask.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="label2.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="label3.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="txtDetials.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnDelete.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="btnEdit.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAMQOAADEDgAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACZVkr/mVZK/5lWSv+ZVkr/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJlWSv+ZVkr/mVZK/5lWSv+ZVkr/mVZK/5lWSv+ZVkr/AAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJlWSv+ZVkr/mlVLfgAAAAAAAAAAAAAAAAAAAAAAAAAAmVZK/5lW
+        Sv+ZVkr/AAAAAAAAAAAAAAAAAAAAAJlWSv+ZVkr/T1nl/09Z5f8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AACZVkr/mVZK/wAAAAAAAAAAAAAAAJlWSv+ZVkr/AAAAAAAAAABPWeX/T1nl/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAJlWSv+ZVkr/AAAAAAAAAACZVkr/mVZK/wAAAAAAAAAAT1nl/09Z5f8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACZVkr/mVZK/wAAAACZVUQPmVZK/wAAAAAAAAAAAAAAAAAAAABPWeX/T1nl/wAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAJlWSv+ZVkr/mVZK/6BfxP8AAAAAAAAAAAAAAAAAAAAAAAAAAE9Z
+        5f9PWeX/K5rz/wAAAAAAAAAAAAAAAAAAAACgX8T/mVZK/6BfxP+gX8T/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAA1iO//T1nl/wAAAAAAAAAAAAAAAAAAAAAAAAAAoF/E/6BfxP+iXccpoF/E/wAAAAAAAAAAAAAAACua
+        8/8rmvP/K5rz/09Z5f8AAAAAAAAAAAAAAAAAAAAAAAAAAKBfxP+gX8T/AAAAAKBfxP+gX8T/AAAAAAAA
+        AAArmvP/K5rz/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKBfxP+gX8T/AAAAAAAAAACgX8T/oF/E/wAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgX8T/oF/E/wAAAAAAAAAAAAAAAKBf
+        xP+gX8T/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgX8T/oF/E/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAoF/E/6BfxP+gX8T/AAAAAAAAAAAAAAAAAAAAAAAAAACgX8T/oF/E/6BfxP8AAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAACgX8T/oF/E/6BfxP+gX8T/oF/E/6BfxP+gX8T/oF/E/wAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgX8T/oF/E/6BfxP+gX8T/AAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAA/D8AAPAPAADn4wAAw/MAAJn5AACZ+QAAvPwAAD48AAA+fAAAuHwAAJn5AACf+QAAz/MAAOPj
+        AADwDwAA/D8AAA==
+</value>
+  </data>
 </root>

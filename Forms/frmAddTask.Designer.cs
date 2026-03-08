@@ -28,12 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAddTask = new System.Windows.Forms.Button();
+            this.btnSaveTask = new System.Windows.Forms.Button();
             this.lblDescription = new System.Windows.Forms.Label();
             this.lblProjectName = new System.Windows.Forms.Label();
             this.txtTaskDescription = new System.Windows.Forms.TextBox();
             this.txtTaskName = new System.Windows.Forms.TextBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -46,15 +49,15 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Add New Task";
             // 
-            // btnAddTask
+            // btnSaveTask
             // 
-            this.btnAddTask.Location = new System.Drawing.Point(184, 307);
-            this.btnAddTask.Name = "btnAddTask";
-            this.btnAddTask.Size = new System.Drawing.Size(200, 39);
-            this.btnAddTask.TabIndex = 14;
-            this.btnAddTask.Text = "Add Task";
-            this.btnAddTask.UseVisualStyleBackColor = true;
-            this.btnAddTask.Click += new System.EventHandler(this.btnAddTask_Click);
+            this.btnSaveTask.Location = new System.Drawing.Point(184, 307);
+            this.btnSaveTask.Name = "btnSaveTask";
+            this.btnSaveTask.Size = new System.Drawing.Size(200, 39);
+            this.btnSaveTask.TabIndex = 14;
+            this.btnSaveTask.Text = "Add Task";
+            this.btnSaveTask.UseVisualStyleBackColor = true;
+            this.btnSaveTask.Click += new System.EventHandler(this.btnSaveTask_Click);
             // 
             // lblDescription
             // 
@@ -89,6 +92,10 @@
             this.txtTaskName.Size = new System.Drawing.Size(397, 24);
             this.txtTaskName.TabIndex = 8;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmAddTask
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -99,10 +106,10 @@
             this.Controls.Add(this.txtTaskDescription);
             this.Controls.Add(this.txtTaskName);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnAddTask);
+            this.Controls.Add(this.btnSaveTask);
             this.Name = "frmAddTask";
             this.Text = "frmAddTask";
-
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,10 +118,11 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnAddTask;
+        private System.Windows.Forms.Button btnSaveTask;
         private System.Windows.Forms.Label lblDescription;
         private System.Windows.Forms.Label lblProjectName;
         private System.Windows.Forms.TextBox txtTaskDescription;
         private System.Windows.Forms.TextBox txtTaskName;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }
