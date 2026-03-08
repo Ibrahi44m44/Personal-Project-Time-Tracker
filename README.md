@@ -43,7 +43,7 @@
 
 ## 📺 شاهد فيديو يوضح المشروع
 قمت بنشر فيديو لتجربة المشروع و اظهار الخطوات القادمة:
-[اضغط هنا لمشاهدة الفيديو على يوتيوب](https://youtube.com/@build-with-ibr?si=vJoIhVc9PzCLKBfZ)
+[اضغط هنا لمشاهدة الفيديو على يوتيوب](https://youtube.com/@build-with-ibr?si=vJoIhVc9PzCLKBfZ) <br>
 [فيديو النسخه الثانية على يوتيوب](https://youtu.be/PIref_SjI2c)
 
 ## 🔗 الروابط
