@@ -1,0 +1,6 @@
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.AssemblyReference.cache
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\obj\Debug\DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+C:\IBR-Stude\Project\Windows Forms\DataAccessLayer\obj\Debug\DataAccessLayer.pdb

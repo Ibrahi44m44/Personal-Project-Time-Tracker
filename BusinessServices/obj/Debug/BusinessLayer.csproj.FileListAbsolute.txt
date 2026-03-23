@@ -1,0 +1,9 @@
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\bin\Debug\BusinessServices.dll
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\bin\Debug\BusinessServices.pdb
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\obj\Debug\BusinessLayer.csproj.AssemblyReference.cache
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\obj\Debug\BusinessLayer.csproj.CoreCompileInputs.cache
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\obj\Debug\BusinessServices.dll
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\obj\Debug\BusinessServices.pdb
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\bin\Debug\DataAccessLayer.dll
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\bin\Debug\DataAccessLayer.pdb
+C:\IBR-Stude\Project\Windows Forms\BusinessServices\obj\Debug\Business.EA331CBA.Up2Date
